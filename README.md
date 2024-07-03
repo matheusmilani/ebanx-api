@@ -18,7 +18,7 @@ Para rodar o sistema, use:
 > flask run
 
 ou caso queira:
-> python application.py
+> python app.py
 
 Após rodar o sistema, faça uma requisição para qualquer URL, isso consolida a database.
 Ressalto que para o primeiro caso, as tabelas serão criadas automaticamente junto com as seeds de banco para inicializar o projeto.

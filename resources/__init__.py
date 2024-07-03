@@ -11,10 +11,10 @@ import json
 import jwt
 import requests
 
-def initialize_resources(application):
-    api = Api(application)
-    jwt = JWTManager(application)
-    CORS(application, supports_credentials=True, origins="*")
+def initialize_resources(app):
+    api = Api(app)
+    jwt = JWTManager(app)
+    CORS(app, supports_credentials=True, origins="*")
 
     from resources.balance_resource import BalanceResource
     from resources.event_resource import EventResource
@@ -24,7 +24,7 @@ def initialize_resources(application):
     api.add_resource(EventResource, '/event')
     api.add_resource(ResetResource, '/reset')
 
-    @application.errorhandler(Exception)
+    @app.errorhandler(Exception)
     def handle_error(e):
         code = 500
         if isinstance(e, HTTPException):
@@ -33,7 +33,7 @@ def initialize_resources(application):
             return jsonify(message=str(e)), code
         return jsonify(message='error'), code
 
-    @application.after_request
+    @app.after_request
     def nocache_control(response):
         response.headers['Last-Modified'] = datetime.now()
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0'

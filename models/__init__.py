@@ -7,6 +7,6 @@ def create():
     db.create_all()
 
 
-def initialize_database(application):
+def initialize_database(app):
     global db
-    db.init_app(application)
+    db.init_app(app)
